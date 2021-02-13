@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
 
         val list = listOf(2, 3, 5, 6, 7, 8, 9)
         sortList(list)
-        Log.d("MainActivity", "FirstLogMassage")
+        Log.d("MainActivity", "First Log Massage")
         println(list)
     }
 
