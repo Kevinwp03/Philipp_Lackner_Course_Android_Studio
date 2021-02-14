@@ -9,20 +9,5 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        val list = listOf(2, 3, 5, 6, 7, 8, 9)
-        sortList(list)
-        Log.d("MainActivity", "First Log Massage")
-        println(list)
-    }
-
-    private fun sortList(list: List<Int>){
-        for (i in 0..list.size - 1){
-            for (j in 0..list.size - 2 )
-                if (list[j] > list [j + 1 ]){
-                    Collections.swap(list, j, j + 1)
-                }
-            }
-        }
     }
 }
