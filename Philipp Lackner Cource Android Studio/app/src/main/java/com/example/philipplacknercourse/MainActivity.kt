@@ -15,13 +15,11 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnApply.setOnClickListener {
-            Toast.makeText(applicationContext, "Button clicked", Toast.LENGTH_SHORT).show()
-            val firstName = binding.etFirstName.text.toString()
-            val lastName = binding.etLastName.text.toString()
-            val birthDay = binding.etBirthDay.text.toString()
-            val country = binding.etCountry.text.toString()
-            Log.d("Main Activity", "Name : $firstName $lastName, born on : $birthDay, from $country. just applied to the formula")
+        var count = 0
+
+        binding.btnCount.setOnClickListener {
+            count++
+            binding.tvCount.text = "Let's count Together = $count"
         }
     }
 }
