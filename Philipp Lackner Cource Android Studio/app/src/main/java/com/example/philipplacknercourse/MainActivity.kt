@@ -2,7 +2,6 @@ package com.example.philipplacknercourse
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import com.example.philipplacknercourse.databinding.ActivityMainBinding
 
@@ -12,17 +11,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
 
-            binding.btnAdd.setOnClickListener{
-            val firstNumber     = binding.etFirstNumber.text.toString().toInt()
-            val secondNumber    = binding.etSecondNumber.text.toString().toInt()
-            val result          = firstNumber + secondNumber
-            binding.tvResult.text = result.toString()
-                Toast.makeText(applicationContext, "Button Clicked",Toast.LENGTH_SHORT).show()
-                Log.d("First Number"," = $firstNumber")
-                Log.d("Second Number"," = $secondNumber")
+        binding.btnAdd.setOnClickListener {
+            binding.Ivanime.setImageResource(R.drawable.anim_satoru_gojo)
+            Toast.makeText(applicationContext, "Satoru Gojo", Toast.LENGTH_SHORT).show()
         }
+
     }
 }
