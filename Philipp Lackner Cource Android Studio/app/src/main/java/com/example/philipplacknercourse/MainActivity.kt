@@ -1,33 +1,24 @@
 package com.example.philipplacknercourse
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
-import android.widget.RadioButton
-import android.widget.Toast
-import com.example.philipplacknercourse.databinding.ActivityMainBinding
+import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityMainBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_main)
 
-        binding.btnOrder.setOnClickListener {
-            val checkedMealRadioButtonId = binding.rgMeat.checkedRadioButtonId
-            val meat = findViewById<RadioButton>(checkedMealRadioButtonId)
-            val cheese = binding.cbCheese.isChecked
-            val onions = binding.cbOnion.isChecked
-            val salad = binding.cbSalad.isChecked
-            val orderString = "You ordered a burger with : \n" +
-                    "${meat.text}" +
-                    (if (cheese) "\nCheese" else "") +
-                    (if (onions) "\nOnions" else "") +
-                    (if (salad) "\nSalad" else "")
-            binding.tvOrder.text = orderString
-
+        btnApply.setOnClickListener {
+            val name = etName.text.toString()
+            val age = etAge.text.toString().toInt()
+            val country = etCountry.text.toString()
+            val person = Person(name, age, country)
+            Intent(this, SecondActivity::class.java).also {
+                it.putExtra("EXTRA_PERSON", person)
+                startActivity(it)
+            }
         }
-
     }
 }
