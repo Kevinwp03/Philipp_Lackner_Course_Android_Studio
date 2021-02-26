@@ -1,5 +1,6 @@
 package com.example.philipplacknercourse
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -10,15 +11,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        btnApply.setOnClickListener {
-            val name = etName.text.toString()
-            val age = etAge.text.toString().toInt()
-            val country = etCountry.text.toString()
-            val person = Person(name, age, country)
-            Intent(this, SecondActivity::class.java).also {
-                it.putExtra("EXTRA_PERSON", person)
-                startActivity(it)
+        btnTakePhoto.setOnClickListener {
+            Intent(Intent.ACTION_GET_CONTENT).also {
+                it.type = "image/*"
+                startActivityForResult(it, 0) //request code -> 0?
             }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && requestCode == 0) {
+            val uri = data?.data
+            ivPhoto.setImageURI(uri)
         }
     }
 }
