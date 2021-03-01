@@ -1,29 +1,30 @@
 package com.example.philipplacknercourse
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        btnTakePhoto.setOnClickListener {
-            Intent(Intent.ACTION_GET_CONTENT).also {
-                it.type = "image/*"
-                startActivityForResult(it, 0) //request code -> 0?
-            }
-        }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && requestCode == 0) {
-            val uri = data?.data
-            ivPhoto.setImageURI(uri)
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.app_bar_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.miAddContact -> Toast.makeText(this, "You Click on Add Contact", Toast.LENGTH_SHORT).show()
+            R.id.miClose -> finish() // Otomatis keluar
+            R.id.miFavorites -> Toast.makeText(this, "You Click on Favorite", Toast.LENGTH_SHORT).show()
+            R.id.miFeedback -> Toast.makeText(this, "You Click on Feedback", Toast.LENGTH_SHORT).show()
+            R.id.miSetting -> Toast.makeText(this, "You Click on Setting", Toast.LENGTH_SHORT).show()
         }
+        return true
     }
 }
