@@ -3,6 +3,9 @@ package com.example.philipplacknercourse
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -13,15 +16,37 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //Spinner
+        val customList = listOf("First", "Second", "Third", "Fourt")
+        val adapter = ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, customList)
+        spMonths.adapter = adapter
+
+        spMonths.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long,
+            ) {
+                Toast.makeText(this@MainActivity,
+                    "You Selected ${parent?.getItemAtPosition(position).toString()}",
+                    Toast.LENGTH_LONG).show()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) { //NotImportant
+            }
+        }
+
         //AlertDialog
         val addContactDialog = AlertDialog.Builder(this)
             .setIcon(R.drawable.ic_add_contact)
             .setTitle("Add Contact")
             .setMessage("Do you want to Add Ms. Dian to your contact list?")
-            .setPositiveButton("YES"){ _,_ ->  // " _ " : artinya tidak menjalankan program tertentu
-                Toast.makeText(this, "You added Ms. Dian to Your Contact", Toast.LENGTH_SHORT).show()
+            .setPositiveButton("YES") { _, _ ->  // " _ " : artinya tidak menjalankan program tertentu
+                Toast.makeText(this, "You added Ms. Dian to Your Contact", Toast.LENGTH_SHORT)
+                    .show()
             }
-            .setNegativeButton("NO"){ _,_ ->
+            .setNegativeButton("NO") { _, _ ->
                 Toast.makeText(this, "You didn't add Ms. Dian to Your Contact", Toast.LENGTH_SHORT).show()
             }.create()
 
