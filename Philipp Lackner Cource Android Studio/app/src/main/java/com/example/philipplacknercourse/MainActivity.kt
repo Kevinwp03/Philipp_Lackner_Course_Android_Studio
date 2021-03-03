@@ -1,8 +1,8 @@
 package com.example.philipplacknercourse
 
-import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
+import android.os.Bundle
+import androidx.viewpager2.widget.ViewPager2
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -10,31 +10,23 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val firstFragment = FirstFragment()
-        val secondFragment = SecondFragment()
-        val thirdFragment = ThirdFragment()
+        val images = listOf(
+            R.drawable.anim_satoru_gojo,
+            R.drawable.image1,
+            R.drawable.image2,
+            R.drawable.image3,
+            R.drawable.image4,
+            R.drawable.image5,
+            R.drawable.image6,
+        )
 
-        setCurrentFragment(firstFragment)
+        val adapter = ViewPagerAdapter(images)
+        viewPager.adapter = adapter
+        // Mengatur Orientation
+        viewPager.orientation = ViewPager2.ORIENTATION_VERTICAL
 
-        bottomNavigationView.setOnNavigationItemSelectedListener {
-            when(it.itemId){
-                R.id.miHome -> setCurrentFragment(firstFragment)
-                R.id.miMessage -> setCurrentFragment(secondFragment)
-                R.id.miProfile -> setCurrentFragment(thirdFragment)
-            }
-            true //Lamda
-        }
-
-        bottomNavigationView.getOrCreateBadge(R.id.miMessage).apply {
-            number = 10
-            isVisible = true
-        }
-    }
-
-    private fun setCurrentFragment(fragment: Fragment){
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.flFragment, fragment)
-            commit() //jangan lupa Commit
-        }
+        //Fake Drag
+        viewPager.fakeDragBy(-10F)
+        viewPager.endFakeDrag()
     }
 }
