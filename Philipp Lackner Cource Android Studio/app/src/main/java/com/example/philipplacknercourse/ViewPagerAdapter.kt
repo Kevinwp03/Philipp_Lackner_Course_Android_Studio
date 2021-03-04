@@ -6,9 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_view_pager.view.*
 
-class ViewPagerAdapter(
-    private val images : List<Int>
-): RecyclerView.Adapter<ViewPagerAdapter.ViewPagerViewHolder>() {
+class ViewPagerAdapter(private val images : List<Int>): RecyclerView.Adapter<ViewPagerAdapter.ViewPagerViewHolder>() {
 
     inner class ViewPagerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
@@ -22,7 +20,7 @@ class ViewPagerAdapter(
         val curImage = images[position]
         holder.itemView.ivImage.setImageResource(curImage)
     }
-//2
+    //2
     override fun getItemCount(): Int {
         return images.size
     }
