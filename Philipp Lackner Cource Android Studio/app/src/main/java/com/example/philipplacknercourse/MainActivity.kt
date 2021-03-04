@@ -1,48 +1,48 @@
 package com.example.philipplacknercourse
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
+    lateinit var toggle: ActionBarDrawerToggle
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val images = listOf(
-            R.drawable.anim_satoru_gojo,
-            R.drawable.image1,
-            R.drawable.image2,
-            R.drawable.image3,
-            R.drawable.image4,
-            R.drawable.image5,
-            R.drawable.image6,
-        )
+        toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
 
-        val adapter = ViewPagerAdapter(images)
-        viewPager.adapter = adapter
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        TabLayoutMediator(tabLayout, viewPager){tab, position ->
-            tab.text = "Tab ${position + 1}"
-        }.attach() // attach akan mengconneckan ke tabLayout dan viewPager
+        //add Item navigation
 
-        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                Toast.makeText(this@MainActivity, "Tab Selected ${tab?.text}", Toast.LENGTH_SHORT).show()
+        navView.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.miItem1 -> Toast.makeText(applicationContext,
+                    "Clicked Item 1",
+                    Toast.LENGTH_SHORT).show()
+                R.id.miItem2 -> Toast.makeText(applicationContext,
+                    "Clicked Item 2",
+                    Toast.LENGTH_SHORT).show()
+                R.id.miItem3 -> Toast.makeText(applicationContext,
+                    "Clicked Item 3",
+                    Toast.LENGTH_SHORT).show()
             }
+            true
+        }
+    }
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-                Toast.makeText(this@MainActivity, "Tab Unselected ${tab?.text}", Toast.LENGTH_SHORT).show()
-
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-                Toast.makeText(this@MainActivity, "Tab Reselected ${tab?.text}", Toast.LENGTH_SHORT).show()
-            }
-        })
-
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (toggle.onOptionsItemSelected(item)) {
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

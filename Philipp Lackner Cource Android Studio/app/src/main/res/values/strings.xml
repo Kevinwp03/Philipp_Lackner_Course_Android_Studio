@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Philipp Lackner Course</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+
     <string-array name="Month">
         <item>January</item>
         <item>February</item>
